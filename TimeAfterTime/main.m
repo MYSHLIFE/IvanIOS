@@ -11,7 +11,9 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
-        NSDate *now = [NSDate date];
+//        NSDate *now = [NSDate date];//equal at next line
+                NSDate *now = [[NSDate alloc] init];
+
         NSLog(@"the new date lives ate %p",now);
         NSLog(@"the new date lives ate %@",now);
         double seconds = [now timeIntervalSince1970];
