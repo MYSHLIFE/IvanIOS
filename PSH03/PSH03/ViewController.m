@@ -27,6 +27,7 @@
     //将textField的内容设置给label
     NSString *digit = [sender currentTitle];
     NSLog(@"pressed at %@",digit);
+    NSLog(@"what is self? %@",self);
 //        label.text = digit;
     if (self.userIsInTheEnteringNumber) {
         self.label.text = [self.label.text stringByAppendingString:digit];
