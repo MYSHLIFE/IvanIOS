@@ -496,6 +496,179 @@ void test12(){
 
 
 //****************Method 5 ********字典操作*************//
+void test13(){
+    NSDictionary *dic1=[NSDictionary dictionaryWithObject:@"1" forKey:@"a"];
+    NSDictionary *dic11 = [NSDictionary dictionaryWithObject:@"11" forKey:@"a1"];
+    NSLog(@"%@",dic1);
+    NSLog(@"%@",dic11);
+
+    /*结果：
+     {
+     a = 1;
+     }
+     */
+    
+    //常用的方式
+    NSDictionary *dic2=[NSDictionary dictionaryWithObjectsAndKeys:
+                        @"1",@"a",
+                        @"2",@"b",
+                        @"3",@"c",
+                        nil];
+    NSLog(@"%@",dic2);
+    /*结果：
+     {
+     a = 1;
+     b = 2;
+     c = 3;
+     }
+     */
+    
+    
+    NSDictionary *dic3=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1",@"2", nil] forKeys:[NSArray arrayWithObjects:@"a",@"b", nil]];
+    NSLog(@"%@",dic3);
+    /*结果：
+     {
+     a = 1;
+     b = 2;
+     }
+     */
+    
+    
+    //更简单的方式
+    NSDictionary *dic4=@{@"1":@"a",@"2":@"b",@"3":@"c"};
+    NSDictionary *dic5 = @{@"11":@"a1",@"22":@"b1",@"33":@"c3"};
+    NSLog(@"%@",dic4);
+    NSLog(@"%@",dic5);
+    /*结果：
+     {
+     1 = a;
+     2 = b;
+     3 = c;
+     }
+     */
+}
+void test14(){
+    NSDictionary *dic1=[NSDictionary dictionaryWithObjectsAndKeys:
+                        @"1",@"a",
+                        @"2",@"b",
+                        @"3",@"c",
+                        @"2",@"d",
+                        nil];
+    NSLog(@"%zi",[dic1 count]); //结果：4
+    NSLog(@"%@",[dic1 valueForKey:@"b"]);//根据键取得值，结果：2
+    NSLog(@"%@",dic1[@"b"]);//还可以这样读取，结果：2
+    NSLog(@"%@,%@",[dic1 allKeys],[dic1 allValues]);
+    /*结果：
+     (
+     d,
+     b,
+     c,
+     a
+     ),(
+     2,
+     2,
+     3,
+     1
+     )
+     
+     */
+    
+    NSLog(@"%@",[dic1 objectsForKeys:[NSArray arrayWithObjects:@"a",@"e" , nil]notFoundMarker:@"not fount"]);//后面一个参数notFoundMarker是如果找不到对应的key用什么值代替
+    /*结果：
+     (
+     1,
+     "not fount"
+     )
+     */
+}
+void test15(){
+    NSDictionary *dic1=[NSDictionary dictionaryWithObjectsAndKeys:
+                        @"1",@"a",
+                        @"2",@"b",
+                        @"3",@"c",
+                        @"2",@"d",
+                        nil];
+    //遍历1
+    for (id key in dic1) {//注意对于字典for遍历循环的是key
+        NSLog(@"%@=%@",key,[dic1 objectForKey:key]);
+    }
+    /*结果：
+     d=2
+     b=2
+     c=3
+     a=1
+     */
+    
+    //遍历2
+    NSEnumerator *enumerator=[dic1 keyEnumerator];//还有值的迭代器[dic1 objectEnumerator]
+    id key=nil;
+    while (key=[enumerator nextObject]) {
+        NSLog(@"%@=%@",key,[dic1 objectForKey:key]);
+        
+    }
+    /*结果：
+     d=2
+     b=2
+     c=3
+     a=1
+     */
+    
+    //遍历3
+    [dic1 enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSLog(@"%@=%@",key,obj);
+    }];
+    /*结果：
+     d=2
+     b=2
+     c=3
+     a=1
+     */
+}
+
+void test16(){
+    NSMutableDictionary *dic=[NSMutableDictionary dictionaryWithObjectsAndKeys:@"1",@"a",
+                              @"2",@"b",
+                              @"3",@"c",
+                              @"2",@"d",
+                              nil];
+    [dic removeObjectForKey:@"b"];
+    NSLog(@"%@",dic);
+    /*结果：
+     {
+     a = 1;
+     c = 3;
+     d = 2;
+     }
+     */
+    
+    [dic addEntriesFromDictionary:@{@"e":@"7",@"f":@"6"}];
+    NSLog(@"%@",dic);
+    /*结果：
+     {
+     a = 1;
+     c = 3;
+     d = 2;
+     e = 7;
+     f = 6;
+     }
+     */
+    
+    [dic setValue:@"5" forKey:@"a"];
+    NSLog(@"%@",dic);
+    /*结果：
+     {
+     a = 5;
+     c = 3;
+     d = 2;
+     e = 7;
+     f = 6;
+     }
+     */
+    
+    
+    //注意，一个字典的key或value添加到字典中时计数器+1；字典释放时调用key或value的release一次，计数器-1
+}
+
 //****************Method 6 ********映射操作*************//
 
 void map(){
@@ -534,6 +707,93 @@ void map(){
     NSLog(@"%@",NSStringFromSelector(mySelector)); //结果：showMessage:
     
 }
+//****************Method 7 ********字符串－文件操作*************//
+void test17(){
+    //读取文件内容
+    NSString *path=@"/Users/Ivan/Documents/Dev/IOS/MyIOS/TEST/test2.txt";
+    NSString *str1=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    //注意上面也可以使用gb2312 gbk等,例如kCFStringEncodingGB_18030_2000，但是需要用CFStringConvertEncodingToNSStringEncoding转换
+    NSLog(@"str1 is %@",str1);
+    //结果：str1 is hello world,世界你好！
+    
+    
+    
+    
+    //上面我们看到了读取文件，但并没有处理错误,当然在ObjC中可以@try @catch @finnally但通常我们并不那么做
+    //由于我们的test.txt中有中文，所以使用下面的编码读取会报错，下面的代码演示了错误获取的过程
+    NSError *error;
+    NSString *str2=[NSString stringWithContentsOfFile:path encoding:kCFStringEncodingGB_18030_2000 error:&error];//注意这句话中的error变量是**error，就是指针的指针那就是指针的地址，由于error就是一个指针此处也就是error的地址&error，具体原因见下面补充
+    if(error){
+        NSLog(@"read error ,the error is %@",error);
+    }else{
+        NSLog(@"read success,the file content is %@",str2);
+    }
+    //结果：read error ,the error is Error Domain=NSCocoaErrorDomain Code=261 "The file couldn’t be opened using the specified text encoding." UserInfo=0x100109620 {NSFilePath=/Users/kenshincui/Desktop/test.txt, NSStringEncoding=1586}
+    
+    
+    
+    
+    //读取文件内容还有一种方式就是利用URl，它除了可以读取本地文件还可以读取网络文件
+//    NSURL *url=[NSURL URLWithString:@"file:///Users/Ivan/Documents/Dev/IOS/MyIOS/TEST/test2.txt"];
+//    NSURL *url=[NSURL URLWithString:@"http://www.apple.com"];
+        NSURL *url=[NSURL URLWithString:@"https://www.zhisiyun.com"];
+
+    NSString *str3=[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"str3 is %@",str3);
+}
+void test18(){
+    //下面是文件写入
+    NSString *path1=@"/Users/Ivan/Documents/Dev/IOS/MyIOS/TEST/test2.txt";
+    NSError *error1;
+    NSString *str11=@"FUCK WORLD,EARTH MAN！";
+    [str11 writeToFile:path1 atomically:YES encoding:NSUTF8StringEncoding error:&error1];//automically代表一次性写入，如果写到中间出错了最后就全部不写入
+    if(error1){
+        NSLog(@"write fail,the error is %@",[error1 localizedDescription]);//调用localizedDescription是只打印关键错误信息
+    }else{
+        NSLog(@"write success!");
+    }
+    //结果：write success!
+}
+//路径操作
+void test19(){
+    NSMutableArray *marray=[NSMutableArray array];//可变数组
+    [marray addObject:@"Users"];
+    [marray addObject:@"KenshinCui"];
+    [marray addObject:@"Desktop"];
+    
+    NSString *path=[NSString pathWithComponents:marray];
+    NSLog(@"%@",path);//字符串拼接成路径
+    //结果：Users/KenshinCui/Desktop
+    
+    NSLog(@"%@",[path pathComponents]);//路径分割成数组
+    /*结果：
+     (
+     Users,
+     KenshinCui,
+     Desktop
+     )
+     */
+    
+    NSLog(@"%i",[path isAbsolutePath]);//是否觉对路径（其实就是看字符串是否以“/”开头）
+    //结果：0
+    NSLog(@"%@",[path lastPathComponent]);//取得最后一个目录
+    //结果：Desktop
+    NSLog(@"%@",[path stringByDeletingLastPathComponent]);//删除最后一个目录，注意path本身是常量不会被修改,只是返回一个新字符串
+    //结果：Users/KenshinCui
+    NSLog(@"%@",[path stringByAppendingPathComponent:@"Documents"]);//路径拼接
+    //结果：Users/KenshinCui/Desktop/Documents
+}
+//扩展名操作
+void test20(){
+    NSString *path=@"/Users/Ivan/Documents/Dev/IOS/MyIOS/TEST/test2.txt";
+    NSLog(@"%@",[path pathExtension]);//取得扩展名，注意ObjC中扩展名不包括"."
+    //结果：txt
+    NSLog(@"%@",[path stringByDeletingPathExtension]);//删除扩展名，注意包含"."
+    //结果：Users/KenshinCui/Desktop/test
+    NSLog(@"%@",[@"Users/KenshinCui/Desktop/test" stringByAppendingPathExtension:@"mp3"]);//添加扩展名
+    //结果：Users/KenshinCui/Desktop/test.mp3
+}
+
 int main(int argc, char * argv[]) {
     //Method 1
     //归档
@@ -575,9 +835,18 @@ int main(int argc, char * argv[]) {
 //    test10();
 //    test11();
 //    test12();
-    //Method5  数组操作
+    //Method5  字典操作
+//    test13();
+//    test14();
+//    test15();
+//    test16();
     //Method6  映射操作
-    map();
+//    map();
+    //Method7  string操作
+//    test17();
+//        test18();
+//        test19();
+    test20();
     return 0;
 
     @autoreleasepool {
