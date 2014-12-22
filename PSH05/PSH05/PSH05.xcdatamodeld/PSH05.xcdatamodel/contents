@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6220.14" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Entity" syncable="YES">
+        <attribute name="attribute" optional="YES" syncable="YES"/>
+        <attribute name="attribute1" optional="YES" syncable="YES"/>
+        <attribute name="attribute2" optional="YES" syncable="YES"/>
+        <attribute name="kjllkl" optional="YES" syncable="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entity3" syncable="YES"/>
+        <relationship name="relationship1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entity2" syncable="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+        <fetchedProperty name="fetchedProperty1" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+        <fetchedProperty name="fetchedProperty2" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+        <fetchedProperty name="fetchedProperty3" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Entity"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="Entity1" syncable="YES"/>
+    <entity name="Entity2" representedClassName="Entity2" syncable="YES">
+        <attribute name="attribute" optional="YES" syncable="YES"/>
+        <attribute name="attribute1" optional="YES" syncable="YES"/>
+    </entity>
+    <entity name="Entity3" syncable="YES">
+        <attribute name="attribute" optional="YES" syncable="YES"/>
+        <attribute name="attribute1" optional="YES" syncable="YES"/>
+        <attribute name="attribute2" optional="YES" syncable="YES"/>
+    </entity>
+    <entity name="Entity4" syncable="YES">
+        <attribute name="attribute" optional="YES" syncable="YES"/>
+        <attribute name="attribute1" optional="YES" syncable="YES"/>
+        <attribute name="attribute2" optional="YES" syncable="YES"/>
+        <attribute name="attribute3" optional="YES" syncable="YES"/>
+        <attribute name="attribute4" optional="YES" syncable="YES"/>
+        <attribute name="attribute5" optional="YES" syncable="YES"/>
+        <attribute name="attribute6" optional="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Entity" positionX="-272" positionY="-216" width="128" height="206"/>
+        <element name="Entity1" positionX="-135" positionY="-279" width="128" height="45"/>
+        <element name="Entity2" positionX="-56" positionY="-163" width="146" height="73"/>
+        <element name="Entity3" positionX="-225" positionY="153" width="128" height="88"/>
+        <element name="Entity4" positionX="0" positionY="108" width="128" height="148"/>
+    </elements>
+</model>
